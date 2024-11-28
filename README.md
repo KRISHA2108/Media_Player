@@ -1,5 +1,28 @@
 # midea_playar
 
+# Media Booster App
+##### Media Booster is a multimedia application built using Flutter, allowing users to enjoy both music and video content seamlessly. With intuitive controls and essential features, users can enhance their media experience like never before.
+
+### Features:
+- Play & Pause: Start and stop music effortlessly.
+- Next & Previous: Navigate between tracks.
+- Favorite Songs: Mark songs as favorites for quick access.
+
+### Video Player:
+- Play Videos: Smooth video playback.
+- Fullscreen Mode: Enjoy videos in fullscreen.
+
+### Sharing:
+- Share Content: Share your favorite songs or videos with others.
+
+#### Dependencies:
+- provider: ^6.1.2 - For state management.
+- video_player: ^2.9.2 - For video playback.
+- audioplayers: ^6.1.0 - For audio playback.
+- chewie: ^1.8.5 - For enhanced video player controls.
+- share_plus: ^10.1.0 - For content sharing.
+- shared_preferences: ^2.3.3 - For local storage and persistence.
+
 <img src = "https://github.com/user-attachments/assets/07f18ae1-6d7a-4d62-a859-59b98865a621" width = "200">
 <img src = "https://github.com/user-attachments/assets/80534e64-1724-466d-bce0-a3ec834a6d8d" width = "200">
 <img src = "https://github.com/user-attachments/assets/ee9f71e7-ec2f-4960-b05f-e54ba6b37d52" width = "200">
