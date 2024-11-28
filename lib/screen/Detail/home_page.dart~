@@ -1,0 +1,121 @@
+import 'package:assets_audio_player/assets_audio_player.dart';
+import 'package:flutter/material.dart';
+import 'package:midea_playar/screen/home/provider/home_provider.dart';
+import 'package:provider/provider.dart';
+
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  late HomeProvider homeProviderR;
+  late HomeProvider homeProviderW;
+  @override
+  void initState() {
+    context.read<HomeProvider>().playOrPause();
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    homeProviderR = context.read<HomeProvider>();
+    homeProviderW = context.watch<HomeProvider>();
+    List<Model> map = [
+      Model(
+        image:
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQeJY9XaKb5r2mH0jT6j6Bx5BkK9TbV2pXwUQ&usqp=CAU",
+        Path:
+            "https://pagalfree.com/musics/128-Aayi Nai - Stree 2 128 Kbps.mp3",
+        title: "Paras",
+      ),
+    ];
+
+    return Scaffold(
+      backgroundColor: const Color(0xff2C3C42),
+      body: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Center(
+          child: Column(
+            children: [
+              const SizedBox(
+                height: 50,
+              ),
+              Container(
+                height: 200,
+                width: 200,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage("lib/assets/images/b_image/1b.jpeg"),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 50,
+              ),
+              const Text(
+                "MUSIC",
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(
+                height: 50,
+              ),
+              const Spacer(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  IconButton(
+                    onPressed: () {
+                      homeProviderR.previousSong();
+                    },
+                    icon: const Icon(
+                      Icons.skip_previous,
+                      color: Colors.white,
+                      size: 38,
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      homeProviderR.playOrPause();
+                    },
+                    icon: (homeProviderW.play)
+                        ? const Icon(Icons.pause)
+                        : const Icon(
+                            Icons.play_arrow,
+                            color: Colors.white,
+                          ),
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      homeProviderR.nextSong();
+                    },
+                    icon: const Icon(
+                      Icons.skip_next,
+                      color: Colors.white,
+                      size: 38,
+                    ),
+                  ),
+                ],
+              ),
+              Slider(
+                value: homeProviderW.liveDuration.inSeconds.toDouble(),
+                max: homeProviderW.totalDuration.inSeconds.toDouble(),
+                onChanged: (value) {},
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class Model {
+  String? Path, image, title;
+  Model({this.image, this.Path, this.title});
+}

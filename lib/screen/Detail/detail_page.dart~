@@ -1,0 +1,135 @@
+import 'package:flutter/material.dart';
+import 'package:midea_playar/screen/Detail/provider/home_provider.dart';
+import 'package:provider/provider.dart';
+
+class DetailPage extends StatefulWidget {
+  const DetailPage({super.key});
+
+  @override
+  State<DetailPage> createState() => _DetailPageState();
+}
+
+class _DetailPageState extends State<DetailPage> {
+  late HomeProvider homeProviderR;
+  late HomeProvider homeProviderW;
+  @override
+  void initState() {
+    context.read<HomeProvider>().playOrPause();
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    homeProviderR = context.read<HomeProvider>();
+    homeProviderW = context.watch<HomeProvider>();
+
+    List image = [
+      'assets/images/1b.jpeg',
+      'assets/images/2b.jpg',
+      'assets/images/3b.jpeg',
+      'assets/images/4b.jpeg',
+      'assets/images/5b.jpeg',
+      'assets/images/6b.webp',
+      'assets/images/7b.jpeg',
+      'assets/images/8b.webp',
+      'assets/images/9b.jpeg',
+      'assets/images/10b.jpg',
+      'assets/images/11b.jpeg',
+      'assets/images/12b.jpg',
+      'assets/images/13b.jpeg',
+      'assets/images/14b.jpg',
+      'assets/images/15b.jpeg',
+      'assets/images/16b.jpeg',
+      'assets/images/17b.jpeg',
+      'assets/images/18b.jpg',
+      'assets/images/19b.jpeg',
+      'assets/images/20b.jpg',
+      'assets/images/21b.jpg',
+      'assets/images/22b.jpg',
+    ];
+
+    return Scaffold(
+      backgroundColor: Colors.black,
+      body: Stack(
+        children: [
+
+         ...image.map((e) => Image.asset(e)).toList(),
+          Padding(
+            padding: const EdgeInsets.all(16),
+            child: Center(
+              child: Column(
+                children: [
+                  const SizedBox(
+                    height: 50,
+                  ),
+                  const SizedBox(
+                    height: 50,
+                  ),
+                  const Text(
+                    "MUSIC",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(
+                    height: 400,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      IconButton(
+                        onPressed: () {
+                          homeProviderR.previousSong();
+                        },
+                        icon: const Icon(
+                          Icons.skip_previous,
+                          color: Colors.white,
+                          size: 38,
+                        ),
+                      ),
+                      IconButton(
+                        onPressed: () {
+                          homeProviderR.playOrPause();
+                        },
+                        icon: (homeProviderW.play)
+                            ? const Icon(
+                                Icons.pause,
+                                color: Colors.white,
+                              )
+                            : const Icon(
+                                Icons.play_arrow,
+                                color: Colors.white,
+                              ),
+                      ),
+                      IconButton(
+                        onPressed: () {
+                          homeProviderR.nextSong();
+                        },
+                        icon: const Icon(
+                          Icons.skip_next,
+                          color: Colors.white,
+                          size: 38,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Slider(
+                    value: homeProviderW.liveDuration.inSeconds.toDouble(),
+                    max: homeProviderW.totalDuration.inSeconds.toDouble(),
+                    onChanged: (value) {},
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class Model {
+  String? Path, image, title;
+  Model({this.image, this.Path, this.title});
+}
